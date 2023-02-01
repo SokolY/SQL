@@ -1,0 +1,47 @@
+Нормалізувати базу даних "Магазини". Привести до третьої нормальной форми, та, якщо зможете - до посиленної (Нормальна форма Бойса-Кодда)
+
+Легенда така:
+Є магазини. У магазинів є Один власник. У власника може бути декілька магазинів. Також у вланика є ІПН.
+Є товари - можуть бути представлені у різних магазинах, де кожний власник сам визначаю ціну на продаж. 
+	Ціна закупівлі товарів власниками - однакова.
+Є співробітники, їх може бути багато у магазині, але один робітник працює лише в одному місці.
+	Працівники теж мають ІПН.
+Наче по таблиці все зрозуміло без зайвого тексту. Якщо будуть уточнюючі питання - питайте.
+
+Коли будете писати скріпти - залешайте коментар невеличкий щоб я розумів чому ви вирішили робити сами так, 
+	тобто як ви собі це пояснюєте.
+
+
+Скрипти на створення похідної бд:
+
+CREATE DATABASE Shops
+
+Create table DenormalizedTable (
+	ProductCode int
+	,ProductName nvarchar(200)
+	,ProductDescription nvarchar(200)
+	,WholeSalePrice money
+	,SellingPrice money
+	,ShopName nvarchar(200)
+	,OwnerIndividualTaxId Int
+	,OwnerName nvarchar(200)
+	,EmployeeIndividualTaxId Int
+	,EmployeeName nvarchar(200)
+	,EmployeeSalary money
+	)
+
+
+INSERT INTO DenormalizedTable
+VALUES
+	(123456,	'Kovbasa'	,'Milled meat',		150.00	,180.00	,'Best Shop',	12811375,	'Ivan Ivanov'	,32845785	,'Stepan Shpak'		,10000.00),
+	(123456,	'Kovbasa'	,'Milled meat',		150.00	,180.00	,'Best Shop',	12811375,	'Ivan Ivanov'	,48097233	,'Vasil Orko'		,13000.00),
+	(123456,	'Kovbasa'	,'Milled meat',		150.00	,200.00	,'Mall',	25811434,	'Petr Petrenko'	,68097653	,'Vasil Orko'		,13000.00),
+	(123456,	'Kovbasa'	,'Milled meat',		150.00	,200.00	,'Mall',	25811434,	'Petr Petrenko'	,75743236	,'Ivan Rost'		,10000.00),
+	(228736,	'Kefir'		,'Old milk',		20.00	,30.00	,'Best Shop',	12811375,	'Ivan Ivanov'	,32845785	,'Stepan Shpak'		,10000.00),
+	(228736,	'Kefir'		,'Old milk',		20.00	,30.00	,'Best Shop',	12811375,	'Ivan Ivanov'	,48097233	,'Vasil Orko'		,13000.00),
+	(228736,	'Kefir'		,'Old milk',		20.00	,50.00	,'Grocery',	12811375,	'Ivan Ivanov'	,57655643	,'Oleksii Zhmikh'	,11000.00),
+	(228736,	'Kefir'		,'Old milk',		20.00	,40.00	,'Mall',	25811434,	'Petr Petrenko'	,68097653	,'Vasil Orko'		,13000.00),
+	(228736,	'Kefir'		,'Old milk',		20.00	,40.00	,'Mall',	25811434,	'Petr Petrenko'	,75743236	,'Ivan Rost'		,10000.00),
+	(367745,	'Milk'		,'Fresh milk',		30.00	,40.00	,'Grocery',	12811375,	'Ivan Ivanov'	,57655643	,'Oleksii Zhmikh'	,11000.00),
+	(367745,	'Milk'		,'Fresh milk',		30.00	,70.00	,'Mall',	25811434,	'Petr Petrenko'	,68097653	,'Vasil Orko'		,13000.00),
+	(367745,	'Milk'		,'Fresh milk',		30.00	,70.00	,'Mall',	25811434,	'Petr Petrenko'	,75743236	,'Ivan Rost'		,10000.00)
